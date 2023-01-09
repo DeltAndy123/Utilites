@@ -165,9 +165,25 @@ const logger = {
   }
 }
 
-module.exports = {
-  AnsiCodes,
-  AnsiBuilder,
-  Ansi,
-  logger
+if (typeof exports == 'object' && typeof module == 'object') {
+  module.exports = {
+    AnsiCodes,
+    AnsiBuilder,
+    Ansi,
+    logger
+  }
+} else if (typeof define == 'function' && define['amd']) {
+  define([], function() {
+    return {
+      AnsiCodes,
+      AnsiBuilder,
+      Ansi,
+      logger
+    }
+  })
+} else if (typeof exports == 'object') {
+  exports['AnsiCodes'] = AnsiCodes
+  exports['AnsiBuilder'] = AnsiBuilder
+  exports['Ansi'] = Ansi
+  exports['logger'] = logger
 }
