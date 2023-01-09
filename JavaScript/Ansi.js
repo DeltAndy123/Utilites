@@ -132,8 +132,8 @@ const Ansi = {
 }
 
 const logger = {
-  debug(input) {
-    console.log(Ansi.Formats.Bold(Ansi.Colors.LightGray('[DEBUG]')), input)
+  debug(...input) {
+    console.log(Ansi.Formats.Bold(Ansi.Colors.LightGray('[DEBUG]')), ...input)
   },
   info(input) {
     var text = input
