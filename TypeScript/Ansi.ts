@@ -50,8 +50,8 @@ const AnsiCodes = {
 }
 
 class AnsiBuilder {
-  items = []
-  text
+  items: string[] = []
+  text: string
 
   add(color) {
     this.items.push(color)
@@ -154,7 +154,7 @@ const logger = {
     if (error instanceof Error) {
       const prefix = Ansi.Formats.Bold(Ansi.Colors.Red(`[${error.name.toUpperCase()}] `))
       console.error(prefix + error.message)
-      const stack = error.stack.split('\n').slice(1)
+      const stack = error.stack ? error.stack.split('\n').slice(1) : []
       stack.forEach((line) => {
         console.error(prefix + line)
       })
@@ -165,7 +165,7 @@ const logger = {
   }
 }
 
-module.exports = {
+export default {
   AnsiCodes,
   AnsiBuilder,
   Ansi,
