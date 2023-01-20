@@ -1,4 +1,4 @@
-const AnsiCodes = {
+export const AnsiCodes = {
   _e: '\u001b',
   Colors: {
     Black: '30',
@@ -49,16 +49,16 @@ const AnsiCodes = {
   ClearLine: `\u001b[2K\u001b[0G`,
 }
 
-class AnsiBuilder {
+export class AnsiBuilder {
   items: string[] = []
-  text: string
+  text!: string
 
-  add(color) {
+  add(color: string) {
     this.items.push(color)
     return this
   }
 
-  remove(color) {
+  remove(color: string) {
     this.items = this.items.filter(item => item !== color)
     return this
   }
@@ -71,7 +71,7 @@ class AnsiBuilder {
     }
   }
 
-  setText(text) {
+  setText(text: string) {
     this.text = text
     return this
   }
@@ -83,59 +83,59 @@ class AnsiBuilder {
 
 }
 
-const Ansi = {
+export const Ansi = {
   Colors: {
-    Black: (t) => `\u001b[30m${t}${AnsiCodes.Reset}`,
-    Red: (t) => `\u001b[31m${t}${AnsiCodes.Reset}`,
-    Green: (t) => `\u001b[32m${t}${AnsiCodes.Reset}`,
-    Yellow: (t) => `\u001b[33m${t}${AnsiCodes.Reset}`,
-    Blue: (t) => `\u001b[34m${t}${AnsiCodes.Reset}`,
-    Purple: (t) => `\u001b[35m${t}${AnsiCodes.Reset}`,
-    Cyan: (t) => `\u001b[36m${t}${AnsiCodes.Reset}`,
-    LightGray: (t) => `\u001b[37m${t}${AnsiCodes.Reset}`,
-    DarkGray: (t) => `\u001b[90m${t}${AnsiCodes.Reset}`,
-    LightRed: (t) => `\u001b[91m${t}${AnsiCodes.Reset}`,
-    LightGreen: (t) => `\u001b[92m${t}${AnsiCodes.Reset}`,
-    LightYellow: (t) => `\u001b[93m${t}${AnsiCodes.Reset}`,
-    LightBlue: (t) => `\u001b[94m${t}${AnsiCodes.Reset}`,
-    LightPurple: (t) => `\u001b[95m${t}${AnsiCodes.Reset}`,
-    LightCyan: (t) => `\u001b[96m${t}${AnsiCodes.Reset}`,
-    White: (t) => `\u001b[97m${t}${AnsiCodes.Reset}`,
+    Black: (t: string) => `\u001b[30m${t}${AnsiCodes.Reset}`,
+    Red: (t: string) => `\u001b[31m${t}${AnsiCodes.Reset}`,
+    Green: (t: string) => `\u001b[32m${t}${AnsiCodes.Reset}`,
+    Yellow: (t: string) => `\u001b[33m${t}${AnsiCodes.Reset}`,
+    Blue: (t: string) => `\u001b[34m${t}${AnsiCodes.Reset}`,
+    Purple: (t: string) => `\u001b[35m${t}${AnsiCodes.Reset}`,
+    Cyan: (t: string) => `\u001b[36m${t}${AnsiCodes.Reset}`,
+    LightGray: (t: string) => `\u001b[37m${t}${AnsiCodes.Reset}`,
+    DarkGray: (t: string) => `\u001b[90m${t}${AnsiCodes.Reset}`,
+    LightRed: (t: string) => `\u001b[91m${t}${AnsiCodes.Reset}`,
+    LightGreen: (t: string) => `\u001b[92m${t}${AnsiCodes.Reset}`,
+    LightYellow: (t: string) => `\u001b[93m${t}${AnsiCodes.Reset}`,
+    LightBlue: (t: string) => `\u001b[94m${t}${AnsiCodes.Reset}`,
+    LightPurple: (t: string) => `\u001b[95m${t}${AnsiCodes.Reset}`,
+    LightCyan: (t: string) => `\u001b[96m${t}${AnsiCodes.Reset}`,
+    White: (t: string) => `\u001b[97m${t}${AnsiCodes.Reset}`,
   },
   BackgroundColors: {
-    Black: (t) => `\u001b[40m${t}${AnsiCodes.Reset}`,
-    Red: (t) => `\u001b[41m${t}${AnsiCodes.Reset}`,
-    Green: (t) => `\u001b[42m${t}${AnsiCodes.Reset}`,
-    Yellow: (t) => `\u001b[43m${t}${AnsiCodes.Reset}`,
-    Blue: (t) => `\u001b[44m${t}${AnsiCodes.Reset}`,
-    Purple: (t) => `\u001b[45m${t}${AnsiCodes.Reset}`,
-    Cyan: (t) => `\u001b[46m${t}${AnsiCodes.Reset}`,
-    LightGray: (t) => `\u001b[47m${t}${AnsiCodes.Reset}`,
-    DarkGray: (t) => `\u001b[100m${t}${AnsiCodes.Reset}`,
-    LightRed: (t) => `\u001b[101m${t}${AnsiCodes.Reset}`,
-    LightGreen: (t) => `\u001b[102m${t}${AnsiCodes.Reset}`,
-    LightYellow: (t) => `\u001b[103m${t}${AnsiCodes.Reset}`,
-    LightBlue: (t) => `\u001b[104m${t}${AnsiCodes.Reset}`,
-    LightPurple: (t) => `\u001b[105m${t}${AnsiCodes.Reset}`,
-    LightCyan: (t) => `\u001b[106m${t}${AnsiCodes.Reset}`,
-    White: (t) => `\u001b[107m${t}${AnsiCodes.Reset}`,
+    Black: (t: string) => `\u001b[40m${t}${AnsiCodes.Reset}`,
+    Red: (t: string) => `\u001b[41m${t}${AnsiCodes.Reset}`,
+    Green: (t: string) => `\u001b[42m${t}${AnsiCodes.Reset}`,
+    Yellow: (t: string) => `\u001b[43m${t}${AnsiCodes.Reset}`,
+    Blue: (t: string) => `\u001b[44m${t}${AnsiCodes.Reset}`,
+    Purple: (t: string) => `\u001b[45m${t}${AnsiCodes.Reset}`,
+    Cyan: (t: string) => `\u001b[46m${t}${AnsiCodes.Reset}`,
+    LightGray: (t: string) => `\u001b[47m${t}${AnsiCodes.Reset}`,
+    DarkGray: (t: string) => `\u001b[100m${t}${AnsiCodes.Reset}`,
+    LightRed: (t: string) => `\u001b[101m${t}${AnsiCodes.Reset}`,
+    LightGreen: (t: string) => `\u001b[102m${t}${AnsiCodes.Reset}`,
+    LightYellow: (t: string) => `\u001b[103m${t}${AnsiCodes.Reset}`,
+    LightBlue: (t: string) => `\u001b[104m${t}${AnsiCodes.Reset}`,
+    LightPurple: (t: string) => `\u001b[105m${t}${AnsiCodes.Reset}`,
+    LightCyan: (t: string) => `\u001b[106m${t}${AnsiCodes.Reset}`,
+    White: (t: string) => `\u001b[107m${t}${AnsiCodes.Reset}`,
   },
   Formats: {
-    Bold: (t) => `\u001b[1m${t}${AnsiCodes.Reset}`,
-    Dim: (t) => `\u001b[2m${t}${AnsiCodes.Reset}`,
-    Italic: (t) => `\u001b[3m${t}${AnsiCodes.Reset}`,
-    Underline: (t) => `\u001b[4m${t}${AnsiCodes.Reset}`,
-    Inverse: (t) => `\u001b[7m${t}${AnsiCodes.Reset}`,
-    Hidden: (t) => `\u001b[8m${t}${AnsiCodes.Reset}`,
-    Strikethrough: (t) => `\u001b[9m${t}${AnsiCodes.Reset}`,
+    Bold: (t: string) => `\u001b[1m${t}${AnsiCodes.Reset}`,
+    Dim: (t: string) => `\u001b[2m${t}${AnsiCodes.Reset}`,
+    Italic: (t: string) => `\u001b[3m${t}${AnsiCodes.Reset}`,
+    Underline: (t: string) => `\u001b[4m${t}${AnsiCodes.Reset}`,
+    Inverse: (t: string) => `\u001b[7m${t}${AnsiCodes.Reset}`,
+    Hidden: (t: string) => `\u001b[8m${t}${AnsiCodes.Reset}`,
+    Strikethrough: (t: string) => `\u001b[9m${t}${AnsiCodes.Reset}`,
   },
 }
 
-const logger = {
-  debug(...input) {
+export const logger = {
+  debug(...input: any[]) {
     console.log(Ansi.Formats.Bold(Ansi.Colors.LightGray('[DEBUG]')), ...input)
   },
-  info(input) {
+  info(input: any) {
     var text = input
     switch (typeof input) {
       case 'object':
@@ -147,10 +147,10 @@ const logger = {
       console.log(Ansi.Formats.Bold(Ansi.Colors.DarkGray('[INFO] ')) + t)
     })
   },
-  warn(text) {
+  warn(text: string) {
     console.warn(Ansi.Formats.Bold(Ansi.Colors.LightYellow('[WARN] ')) + text)
   },
-  error(error) {
+  error(error: any) {
     if (error instanceof Error) {
       const prefix = Ansi.Formats.Bold(Ansi.Colors.Red(`[${error.name.toUpperCase()}] `))
       console.error(prefix + error.message)
@@ -163,11 +163,4 @@ const logger = {
       console.error(prefix + error)
     }
   }
-}
-
-export default {
-  AnsiCodes,
-  AnsiBuilder,
-  Ansi,
-  logger
 }
