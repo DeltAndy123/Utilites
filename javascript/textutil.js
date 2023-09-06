@@ -86,20 +86,22 @@ function cleanEmojis(title) {
 }
 
 
-const exported = {
-  cleanText,
-  cleanPunctuation,
-  cleanEmojis
-}
+{
+  const exported = {
+    cleanText,
+    cleanPunctuation,
+    cleanEmojis
+  }
 
-if (typeof exports === 'object' && typeof module === 'object') {
-  module.exports = exported;
-} else if (typeof define === 'function' && define['amd']) {
-  define([], function() {
-    return exported;
-  })
-} else if (typeof exports === 'object') {
-  Object.entries(exported).forEach(([key, val]) => {
-    exports[key] = val;
-  })
+  if (typeof exports === 'object' && typeof module === 'object') {
+    module.exports = exported;
+  } else if (typeof define === 'function' && define['amd']) {
+    define([], function() {
+      return exported;
+    })
+  } else if (typeof exports === 'object') {
+    Object.entries(exported).forEach(([key, val]) => {
+      exports[key] = val;
+    })
+  }
 }

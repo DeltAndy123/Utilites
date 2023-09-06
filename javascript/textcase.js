@@ -317,28 +317,30 @@ function listHasWord(list, word) {
 }
 
 
-const exported = {
-  toLowerCase,
-  toUpperCase,
-  toFirstLetterUppercase,
-  toSentenceCase,
-  toTitleCase,
-  toCapitalizeCase,
-  isInTitleCase,
-  isMostlyAllCaps,
-  isWordCapitalCase,
-  isWordAllLower,
-  isFirstLetterCapital
-}
+{
+  const exported = {
+    toLowerCase,
+    toUpperCase,
+    toFirstLetterUppercase,
+    toSentenceCase,
+    toTitleCase,
+    toCapitalizeCase,
+    isInTitleCase,
+    isMostlyAllCaps,
+    isWordCapitalCase,
+    isWordAllLower,
+    isFirstLetterCapital
+  }
 
-if (typeof exports === 'object' && typeof module === 'object') {
-  module.exports = exported;
-} else if (typeof define === 'function' && define['amd']) {
-  define([], function() {
-    return exported;
-  })
-} else if (typeof exports === 'object') {
-  Object.entries(exported).forEach(([key, val]) => {
-    exports[key] = val;
-  })
+  if (typeof exports === 'object' && typeof module === 'object') {
+    module.exports = exported;
+  } else if (typeof define === 'function' && define['amd']) {
+    define([], function() {
+      return exported;
+    })
+  } else if (typeof exports === 'object') {
+    Object.entries(exported).forEach(([key, val]) => {
+      exports[key] = val;
+    })
+  }
 }
