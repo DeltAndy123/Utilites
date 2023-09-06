@@ -5,7 +5,7 @@ const titleCaseNotCapitalized = new Set(["a","an","the","and","but","or","nor","
 const allowlistedWords=new Set(["NASA","osu!","PETA","DEFCONConference","DEFCON","HDHR","HDDT","HDDTHR","TUYU","umu.","MIMI","S3RL","NOMA","DECO*27","EVO+","VINXIS","IOSYS","fhána","LGBT","LGBTQ","LGBTQIA","LGBTQ+IA","LGBTQ2S","BIPOC","STFU","TLDR","TOTK","BOTW","SAINTCON","TASBOT","FNAF","IANA","OSHA","NAFTA","SCOTUS","CPAN","SWAT","USAF","ADHD","IONOS","NORAD","UNHRC","LDAC","NVENC","HEVC","NVBFC","IMAX","CUDA","VAAPI","JPEG","IETF","zstd","LZMA","ANOVA","HEIF","HTML","HDTV","HDMI","EULA","GDPR","CCPA","HTTP","HTTPS","BIOS","DMCA","GUID","JSON","MIDI","MMORPG","OLED","RHEL","SFTP","PCIe","SSID","UEFI","UUID","VRAM","XMPP","YAML","OWSLA","DJVI","PSYQUI","INZO","MYRNE","KNOWER","PYLOT","USAO","TESV","WRLD","LAPD","NYPD","NVMe","WYSIWYG","TAS","USSR","Yu-Gi-Oh!","II","III","IV","VI","VII","VIII","XIV","XV","XVI","XVII","XVIII"])
 const acronymBlocklist=new Set(["not","see","be","you","are","is","it","of","the","to","new","end","won","sue","day","fly","so","one","two","six","ten","can"]);
 
-export function toLowerCase(str) {
+function toLowerCase(str) {
   const words = str.split(" ");
 
   let result = "";
@@ -23,7 +23,7 @@ export function toLowerCase(str) {
 
   return result.trim();
 }
-export function toUpperCase(str) {
+function toUpperCase(str) {
   const words = str.split(" ");
 
   let result = "";
@@ -42,7 +42,7 @@ export function toUpperCase(str) {
   return result.trim();
 }
 
-export function toFirstLetterUppercase(str) {
+function toFirstLetterUppercase(str) {
   const words = str.split(" ");
 
   let result = "";
@@ -62,7 +62,7 @@ export function toFirstLetterUppercase(str) {
   return result.trim();
 }
 
-export function toSentenceCase(str, ignoreCaps) {
+function toSentenceCase(str, ignoreCaps) {
   const words = str.split(" ");
   const inTitleCase = isInTitleCase(words);
   const mostlyAllCaps = isMostlyAllCaps(words);
@@ -100,7 +100,7 @@ export function toSentenceCase(str, ignoreCaps) {
   return result.trim();
 }
 
-export function toTitleCase(str, ignoreCaps) {
+function toTitleCase(str, ignoreCaps) {
   const words = str.split(" ");
   const mostlyAllCaps = isMostlyAllCaps(words);
 
@@ -132,7 +132,7 @@ export function toTitleCase(str, ignoreCaps) {
   return result.trim();
 }
 
-export function toCapitalizeCase(str, ignoreCaps) {
+function toCapitalizeCase(str, ignoreCaps) {
   const words = str.split(" ");
   const mostlyAllCaps = isMostlyAllCaps(words);
 
@@ -154,7 +154,7 @@ export function toCapitalizeCase(str, ignoreCaps) {
   return result.trim();
 }
 
-export function isInTitleCase(words) {
+function isInTitleCase(words) {
   let count = 0;
   let ignored = 0;
   for (const word of words) {
@@ -176,7 +176,7 @@ function shouldTrustCaps(mostlyAllCaps, words, index) {
       || isAllCaps(words[index + 1]) && !forceKeepFormatting(words[index + 1]));
 }
 
-export function isMostlyAllCaps(words) {
+function isMostlyAllCaps(words) {
   let count = 0;
   for (const word of words) {
     // Has at least one char and is upper case
@@ -220,7 +220,7 @@ function capitalizeFirstLetter(word) {
   return result.join("");
 }
 
-export function isWordCapitalCase(word) {
+function isWordCapitalCase(word) {
   return !!word.match(/^[^\p{L}]*[\p{Lu}][^\p{Lu}]+$/u);
 }
 
@@ -250,11 +250,11 @@ function isYear(word) {
   return !!word.match(/^[「〈《【〔⦗『〖〘<({["'‘]*[0-9]{2,4}'?s[〙〗』⦘〕】》〉」)}\]"']*$/);
 }
 
-export function isWordAllLower(word) {
+function isWordAllLower(word) {
   return !!word.match(/^[\p{Ll}]+$/u);
 }
 
-export function isFirstLetterCapital(word) {
+function isFirstLetterCapital(word) {
   return !!word.match(/^[^\p{L}]*[\p{Lu}]/u);
 }
 
@@ -314,4 +314,31 @@ function isDelimeter(word) {
 
 function listHasWord(list, word) {
   return list.has(word.replace(/[[「〈《【〔⦗『〖〘<({:〙〗』⦘〕】》〉」)}\]]/g, ""))
+}
+
+
+const exported = {
+  toLowerCase,
+  toUpperCase,
+  toFirstLetterUppercase,
+  toSentenceCase,
+  toTitleCase,
+  toCapitalizeCase,
+  isInTitleCase,
+  isMostlyAllCaps,
+  isWordCapitalCase,
+  isWordAllLower,
+  isFirstLetterCapital
+}
+
+if (typeof exports === 'object' && typeof module === 'object') {
+  module.exports = exported;
+} else if (typeof define === 'function' && define['amd']) {
+  define([], function() {
+    return exported;
+  })
+} else if (typeof exports === 'object') {
+  Object.entries(exported).forEach(([key, val]) => {
+    exports[key] = val;
+  })
 }

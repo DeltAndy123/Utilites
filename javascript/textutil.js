@@ -1,7 +1,7 @@
 // Taken and modified from
 // https://github.com/ajayyy/DeArrow/blob/master/src/titles/titleFormatter.ts
 
-export function cleanText(title) {
+function cleanText(title) {
   return cleanPunctuation(title)
     .replace(/(^|\s)>(\S)/g, "$1$2")
     .trim();
@@ -33,7 +33,7 @@ function cleanWordPunctuation(title) {
   return cleanTitle;
 }
 
-export function cleanPunctuation(title) {
+function cleanPunctuation(title) {
   title = cleanWordPunctuation(title);
   const words = title.split(" ");
 
@@ -65,7 +65,7 @@ export function cleanPunctuation(title) {
   return result.trim();
 }
 
-export function cleanEmojis(title) {
+function cleanEmojis(title) {
   // \uFE0F is the emoji variation selector, it comes after non colored symbols to turn them into emojis
   // \uFE0E is similar but makes colored emojis into non colored ones
   // \u200D is the zero width joiner, it joins emojis together
@@ -83,4 +83,23 @@ export function cleanEmojis(title) {
   } else {
     return title;
   }
+}
+
+
+const exported = {
+  cleanText,
+  cleanPunctuation,
+  cleanEmojis
+}
+
+if (typeof exports === 'object' && typeof module === 'object') {
+  module.exports = exported;
+} else if (typeof define === 'function' && define['amd']) {
+  define([], function() {
+    return exported;
+  })
+} else if (typeof exports === 'object') {
+  Object.entries(exported).forEach(([key, val]) => {
+    exports[key] = val;
+  })
 }
